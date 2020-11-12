@@ -1,0 +1,2 @@
+# nuxt-blog
+nuxt test
