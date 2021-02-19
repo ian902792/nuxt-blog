@@ -11,6 +11,8 @@
         <p class="text-gray-500">You have a new message!</p>
       </div>
     </div>
+
+
   </div>
 </template>
 
@@ -19,7 +21,7 @@
     layout: 'blog',
     head() {
       // Set Meta Tags for this Page
-    }
+    },
     // ...
   }
 </script>
