@@ -73,6 +73,9 @@ export const mutations = {
       productId,
       quantity
     });
+
+    // mixpanel test
+    mixpanel.track("addToCart", {"quantity": quantity, "productId": productId});
   },
 
   removeItem(state, productId) {
@@ -84,10 +87,22 @@ export const mutations = {
 
   openCart(state) {
     state.cartIsOpen = true;
+
+    // mixpanel test
+    const totalQuantity = state.productsAdded.reduce(
+        (previous, current) => previous + current.quantity,
+        0
+      );
+    console.log("totalQuantity:", totalQuantity);
+    mixpanel.track("openCart", {"totalQuantity": totalQuantity});
+
   },
 
   closeCart(state) {
     state.cartIsOpen = false;
+
+    // mixpanel test
+    mixpanel.track("closeCart", {"time": (new Date()).toISOString())});
   }
 };
 

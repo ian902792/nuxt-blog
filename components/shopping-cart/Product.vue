@@ -66,6 +66,7 @@ export default {
   methods: {
     addToCart() {
       const quantity = Number.parseInt(this.quantity, 10);
+
       if (quantity) {
         this.$store.commit('addToCart', {
           productId: this.id,
