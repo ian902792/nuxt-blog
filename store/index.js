@@ -102,7 +102,7 @@ export const mutations = {
     state.cartIsOpen = false;
 
     // mixpanel test
-    mixpanel.track("closeCart", {"time": (new Date()).toISOString())});
+    mixpanel.track("closeCart", {"time": (new Date()).toISOString()});
   }
 };
 
