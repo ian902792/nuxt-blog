@@ -1,7 +1,7 @@
 <template>
 <div class="h-full flex p-2 pr-6">
   <div class="flex flex-col justify-center">
-    <p>Subtotal: R$ {{ formatPrice(subtotal) }}</p>
+    <p>Subtotal: $ {{ formatPrice(subtotal) }}</p>
   </div>
   <div class="relative h-full">
     <button class="w-24 h-full text-gray-200 -mr-6"

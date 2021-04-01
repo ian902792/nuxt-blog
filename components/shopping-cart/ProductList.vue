@@ -1,14 +1,14 @@
 <template>
-<div>
-    <div class="flex flex-wrap justify-center sm:justify-start bg-grey-lightest">
-      <product
-        v-for="product in products"
-        :key="product.id"
-        v-bind="product"
-      >
-      </product>
-    </div>
-</div>
+  <div>
+      <div class="flex flex-wrap justify-center sm:justify-start bg-grey-lightest">
+        <product
+          v-for="product in products"
+          :key="product.id"
+          v-bind="product"
+        >
+        </product>
+      </div>
+  </div>
 </template>
 
 <script>

@@ -1,10 +1,11 @@
 export const state = () => ({
   cartIsOpen: false,
+  hasLogin: false,
   products: [
     {
       id: 1,
-      title: "Produto A",
-      description: "Modelo A",
+      title: "Product A",
+      description: "Model A",
       price: 229.9,
       installments: 4,
       isFreeShipping: true,
@@ -12,8 +13,8 @@ export const state = () => ({
     },
     {
       id: 2,
-      title: "Produto B",
-      description: "Modelo B",
+      title: "Product B",
+      description: "Model B",
       price: 199.9,
       installments: 3,
       isFreeShipping: true,
@@ -21,8 +22,8 @@ export const state = () => ({
     },
     {
       id: 3,
-      title: "Produto C",
-      description: "Modelo C",
+      title: "Product C",
+      description: "Model C",
       price: 29.9,
       installments: 2,
       isFreeShipping: true,
@@ -30,8 +31,8 @@ export const state = () => ({
     },
     {
       id: 4,
-      title: "Produto D",
-      description: "Modelo D",
+      title: "Product D",
+      description: "Model D",
       price: 429.9,
       installments: 4,
       isFreeShipping: true,
@@ -39,8 +40,8 @@ export const state = () => ({
     },
     {
       id: 5,
-      title: "Produto E",
-      description: "Modelo E",
+      title: "Product E",
+      description: "Model E",
       price: 369.9,
       installments: 3,
       isFreeShipping: true,
@@ -48,8 +49,8 @@ export const state = () => ({
     },
     {
       id: 6,
-      title: "Produto F",
-      description: "Modelo F",
+      title: "Product F",
+      description: "Model F",
       price: 929.9,
       installments: 12,
       isFreeShipping: true,
@@ -75,10 +76,20 @@ export const mutations = {
     });
 
     // mixpanel test
-    mixpanel.track("addToCart", {"quantity": quantity, "productId": productId});
+    mixpanel.track("addToCart", { quantity: quantity, productId: productId });
   },
 
   removeItem(state, productId) {
+    const product = state.productsAdded.find(
+      item => item.productId === productId
+    );
+
+    // mixpanel test
+    mixpanel.track("removeFromCart", {
+      quantity: product.quantity,
+      productId: productId
+    });
+
     const indexToRemove = state.productsAdded.findIndex(
       item => item.productId === productId
     );
@@ -90,19 +101,48 @@ export const mutations = {
 
     // mixpanel test
     const totalQuantity = state.productsAdded.reduce(
-        (previous, current) => previous + current.quantity,
-        0
-      );
-    console.log("totalQuantity:", totalQuantity);
-    mixpanel.track("openCart", {"totalQuantity": totalQuantity});
+      (previous, current) => previous + current.quantity,
+      0
+    );
 
+    mixpanel.track("openCart", { totalQuantity: totalQuantity });
   },
 
   closeCart(state) {
     state.cartIsOpen = false;
 
     // mixpanel test
-    mixpanel.track("closeCart", {"time": (new Date()).toISOString()});
+    mixpanel.track("closeCart");
+  },
+
+  doLogin(state, loginName) {
+    state.hasLogin = true;
+
+    // mixpanel test
+    mixpanel.track("Login success", {
+      Name: loginName
+    });
+  },
+
+  doLogout(state) {
+    state.hasLogin = false;
+
+    // mixpanel test
+    mixpanel.track("Logout success");
+  },
+
+  buyAll(state) {
+    console.log("buy all, subtotal:", this.getters.subtotal);
+
+    // mixpanel test
+    mixpanel.track("Buy all", {
+      Subtotal: this.getters.subtotal
+    });
+
+    // Track Revenue
+    mixpanel.people.track_charge(this.getters.subtotal);
+
+    state.productsAdded = [];
   }
 };
 

@@ -6,16 +6,16 @@
     </figure>
     <div class="w-12 mb-4 border-t-2 border-indigo"></div>
     <p>
-      <small class="text-grey-darker">R$</small>
+      <small class="text-grey-darker">$</small>
       <span class="text-xl font-semibold">{{ formatPrice(price) }}</span>
     </p>
     <p class="text-grey-darker">
-      ou {{ installments }} x <small>R$</small>
+      Can {{ installments }} x <small>$</small>
       <span class="font-semibold">
         {{ formatPrice(installmentPrice) }}
       </span>
     </p>
-    <p>Quantidade:
+    <p>Quantity:
       <m-input-number
         v-model="quantity"
         :min="1"
@@ -24,10 +24,10 @@
     </p>
     <div class="my-2">
       <m-button
-        class="py-2 px-4"
+        class="py-2 px-4 w-48"
         @click="addToCart"
       >
-        Adicionar ao carrinho
+        Add to cart
       </m-button>
     </div>
   </div>
