@@ -111,7 +111,11 @@ export default {
         });
 
         this.$store.commit("doLogin", self.loginName);
-        this.$router.push("/shoppingcart");
+
+        // simulate data processed
+        setTimeout(() => {
+          this.$router.push("/shoppingcart");
+        }, 2000);
       }
     },
   },
